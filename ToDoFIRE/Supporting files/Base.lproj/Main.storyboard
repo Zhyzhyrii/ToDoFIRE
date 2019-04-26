@@ -124,6 +124,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="efB-h4-xLh" id="n41-ic-TxG"/>
                         <outlet property="passwordTextField" destination="zUP-Pk-29D" id="NzO-r7-aho"/>
+                        <outlet property="scrollView" destination="3rb-ei-ZNb" id="EJw-Gk-FM2"/>
                         <outlet property="warnLabel" destination="i1s-q5-8gJ" id="3jq-BQ-iMh"/>
                         <segue destination="Shx-G9-DKd" kind="show" identifier="tasksSegue" id="V8J-vb-7Hr"/>
                     </connections>

@@ -9,10 +9,13 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let segueIdentifier = "tasksSegue"
+    
+    var keyBoardDismissTapGesture: UIGestureRecognizer!
 
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var warnLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -20,9 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(kbDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+        registerForKeyBoardNotifications()
         
         warnLabel.alpha = 0
         
@@ -31,6 +32,14 @@ class LoginViewController: UIViewController {
                 self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
             }
         }
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+    }
+    
+    deinit {
+        removeKeyboardNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,11 +49,45 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
+    func registerForKeyBoardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(kbDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
+    func removeKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
     @objc func kbDidShow(notification: Notification) {
+        if keyBoardDismissTapGesture == nil{
+            keyBoardDismissTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            keyBoardDismissTapGesture.cancelsTouchesInView = false
+            view.addGestureRecognizer(keyBoardDismissTapGesture)
+        }
+        let userInfo = notification.userInfo
+        let kbFrameSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        scrollView.contentOffset  = CGPoint(x: 0, y: kbFrameSize.height)
      }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @objc func kbDidHide() {
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        if keyBoardDismissTapGesture != nil {
+            view.removeGestureRecognizer(keyBoardDismissTapGesture)
+            keyBoardDismissTapGesture = nil
+        }
+        scrollView.contentOffset = CGPoint.zero
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+//        textField.endEditing(true)
+        return true
     }
     
     func displayWarningLabel(withText text: String) {
