@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780C5D9222899CF900A5ED9E /* CustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C5D9122899CF900A5ED9E /* CustomUser.swift */; };
+		780C5D9422899FEA00A5ED9E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C5D9322899FEA00A5ED9E /* Task.swift */; };
 		78C21239226F140900781596 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C21238226F140900781596 /* AppDelegate.swift */; };
 		78C2123B226F140900781596 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C2123A226F140900781596 /* LoginViewController.swift */; };
 		78C2123E226F140900781596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C2123C226F140900781596 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		1675F293525FD92CFC5244E7 /* Pods-ToDoFIRE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoFIRE.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoFIRE/Pods-ToDoFIRE.release.xcconfig"; sourceTree = "<group>"; };
 		1BD733E2778A50DA823A2762 /* Pods_ToDoFIRE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoFIRE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		780C5D9122899CF900A5ED9E /* CustomUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUser.swift; sourceTree = "<group>"; };
+		780C5D9322899FEA00A5ED9E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		78C21235226F140900781596 /* ToDoFIRE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoFIRE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C21238226F140900781596 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78C2123A226F140900781596 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		780C5D9022899CE100A5ED9E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				780C5D9122899CF900A5ED9E /* CustomUser.swift */,
+				780C5D9322899FEA00A5ED9E /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		78C2122C226F140800781596 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +78,7 @@
 		78C21237226F140900781596 /* ToDoFIRE */ = {
 			isa = PBXGroup;
 			children = (
+				780C5D9022899CE100A5ED9E /* Models */,
 				78C2124D226F379E00781596 /* Controllers */,
 				78C2124C226F378700781596 /* Supporting files */,
 			);
@@ -237,7 +251,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780C5D9222899CF900A5ED9E /* CustomUser.swift in Sources */,
 				78C2123B226F140900781596 /* LoginViewController.swift in Sources */,
+				780C5D9422899FEA00A5ED9E /* Task.swift in Sources */,
 				78C21239226F140900781596 /* AppDelegate.swift in Sources */,
 				78C2124B226F375E00781596 /* TasksViewController.swift in Sources */,
 			);
