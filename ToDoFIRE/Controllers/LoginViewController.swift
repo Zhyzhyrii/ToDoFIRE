@@ -12,6 +12,7 @@ import Firebase
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let segueIdentifier = "tasksSegue"
+    var ref: DatabaseReference!
     
     var keyBoardDismissTapGesture: UIGestureRecognizer!
 
@@ -23,6 +24,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference(withPath: "users")
         registerForKeyBoardNotifications()
         
         warnLabel.alpha = 0
@@ -125,16 +127,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if error == nil {
-                if user != nil {
-
-                } else {
-                    print("User is not created")
-                }
-            } else {
-                print(error!.localizedDescription)
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+            
+            guard error == nil, user != nil else {
+                print(error?.localizedDescription)
+                return
             }
+            
+            let userRef = self?.ref.child((user?.user.uid)!)
+            userRef?.setValue(["email": user?.user.email])
+            
         }
     }
     
